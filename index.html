@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Suporte - Realismo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), inset 0 0 20px rgba(0, 255, 255, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(0, 255, 255, 0.9), inset 0 0 30px rgba(0, 255, 255, 0.5);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+
+        body {
+            background-image: url('fundo-realista.jpg'); /* Um fundo realista ou futurista */
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        button {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white">
+
+    <!-- Login Page -->
+    <div id="loginPage" class="min-h-screen flex items-center justify-center fade-in">
+        <div class="bg-gradient-to-br from-gray-800 to-gray-900 text-gray-300 rounded-xl shadow-2xl p-8 max-w-md w-full transform transition duration-500 hover:scale-105">
+            <!-- Logo -->
+            <img 
+                src="logo-varejao-auto-pecas.png" 
+                alt="Atendimento ao Cliente" 
+                class="w-1/2 mx-auto rounded-lg mb-6 shadow-lg">
+            
+            <!-- Título -->
+            <h2 class="text-3xl font-extrabold text-center mb-6 text-cyan-400">Sistema de Suporte</h2>
+            
+            <!-- Formulário -->
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Email:</label>
+                    <input type="email" id="email" class="w-full p-3 bg-gray-700 border border-cyan-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-300" placeholder="Digite seu email" required>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Senha:</label>
+                    <input type="password" id="password" class="w-full p-3 bg-gray-700 border border-cyan-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-300" placeholder="Digite sua senha" required>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-white font-bold rounded-lg shadow-lg glow">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Client Dashboard -->
+    <div id="clientDashboard" class="hidden p-8 fade-in">
+        <header class="bg-cyan-600 p-4 rounded-md mb-6 flex justify-between items-center shadow-md">
+            <h1 class="text-xl font-bold">Bem-vindo, Cliente</h1>
+            <button id="logoutBtn" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition">Sair</button>
+        </header>
+        <main>
+            <h2 class="text-2xl font-bold mb-6">Escolha uma das opções abaixo:</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Formulário -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 text-gray-300 p-6 rounded-lg shadow-md hover:shadow-xl transform transition hover:scale-105">
+                    <h3 class="text-lg font-bold mb-2 text-cyan-400">Formulário de Suporte</h3>
+                    <p class="text-sm text-gray-400 mb-4">Preencha o formulário para descrever seu problema.</p>
+                    <a href="https://forms.gle/rV7j61LrkFZ4WtwJA" target="_blank" class="block text-center py-3 bg-gradient-to-r from-cyan-500 to-cyan-700 text-white rounded-lg shadow-md hover:scale-105 transition">Acessar Formulário</a>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 text-gray-300 p-6 rounded-lg shadow-md hover:shadow-xl transform transition hover:scale-105">
+                    <h3 class="text-lg font-bold mb-2 text-cyan-400">WhatsApp</h3>
+                    <p class="text-sm text-gray-400 mb-4">Entre em contato diretamente pelo WhatsApp.</p>
+                    <a href="https://wa.me/5571992640013" target="_blank" class="block text-center py-3 bg-gradient-to-r from-green-500 to-green-700 text-white rounded-lg shadow-md hover:scale-105 transition">Acessar WhatsApp</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const loginPage = document.getElementById("loginPage");
+        const clientDashboard = document.getElementById("clientDashboard");
+        const loginForm = document.getElementById("loginForm");
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            if (email === "ovarejao@gmail.com" && password === "ovarejao123") {
+                loginPage.classList.add("hidden");
+                clientDashboard.classList.remove("hidden");
+            } else {
+                alert("Credenciais inválidas!");
+            }
+        });
+
+        logoutBtn.addEventListener("click", () => {
+            clientDashboard.classList.add("hidden");
+            loginPage.classList.remove("hidden");
+        });
+    </script>
+</body>
+</html>
